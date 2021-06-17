@@ -1,7 +1,9 @@
-import React, { useState, useLayoutEffect, useRef, useEffect } from 'react';
-import img from '../../static/img/4a5e48e736d12f2ef27d70b84fc2d56284356824.jpg';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import CanvasRect from '../../utils/draw';
 import photoFilter from '../../utils/filter';
+
+import img from '../../static/img/4a5e48e736d12f2ef27d70b84fc2d56284356824.jpg';
+
 import './index.less';
 
 const buttonList = [
@@ -34,7 +36,7 @@ function Home(props) {
     queryImageData();
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { width, height } = size;
     const ctx = canvasRef.current.getContext('2d');
     ctx.drawImage(imgRef.current, 0, 0, imgRef.current.naturalWidth, imgRef.current.naturalHeight, 0, 0, width, height);
@@ -69,10 +71,8 @@ function Home(props) {
     const imageData = func ? func(baseImageData) : baseImageData;
     const img = filterImage(imageData);
     const ctx = canvasRef.current.getContext('2d');
-    const drawImage = new CanvasRect(img, ctx);
+    new CanvasRect(img, ctx);
     ctx.clearRect(0, 0, width, height);
-    // drawImage.start();
-    // setTimeout(drawImage.animation, 1000);
   };
 
   const filterImage = (imageData) => {
