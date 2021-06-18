@@ -17,11 +17,11 @@ const buttonList = [
   { text: '熔铸滤镜', code: 'rzlj' },
   { text: '冰冻滤镜', code: 'bdlj' },
   { text: '连环画滤镜', code: 'lhhlj' },
-  { text: '褐色滤镜', code: 'hslj' },
+  { text: '暗调滤镜', code: 'adlj' },
   { text: '高斯模糊滤镜', code: 'gsmmlj' },
 ];
 
-function Home(props) {
+function Home() {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const canvasRef = useRef(null);
   const imgRef = useRef(null);
@@ -81,6 +81,7 @@ function Home(props) {
     const src = canvas.toDataURL();
     return src;
   };
+
   return (
     <div className='home-view'>
       <div className='home-content'>

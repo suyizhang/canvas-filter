@@ -14,7 +14,7 @@ const photoFilter = {
     let data = imgData.data;
     for (var i = 0; i < data.length; i += 4) {
       var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-      data[i] = data[i + 1] = data[i + 2] = avg >= 100 ? 255 : 0;
+      data[i] = data[i + 1] = data[i + 2] = avg >= 125 ? 255 : 0;
     }
     return imgData;
   },
@@ -30,7 +30,7 @@ const photoFilter = {
     return imgData;
   },
 
-  // 取色滤镜
+  // 去色滤镜
   qslj: function (imgData) {
     let data = imgData.data;
     for (let i = 0; i < data.length; i++) {
@@ -79,7 +79,7 @@ const photoFilter = {
       let newG = (g * 128) / (r + b + 1);
       let newB = (b * 128) / (g + r + 1);
       let rgbArr = [newR, newG, newB].map((e) => {
-        return e < 0 ? 0 : e > 255 ? 255 : e;
+        return e < 0 ? e * -1 : e > 255 ? 255 : e;
       });
       [data[i * 4], data[i * 4 + 1], data[i * 4 + 2]] = rgbArr;
     }
@@ -97,7 +97,7 @@ const photoFilter = {
       let newG = ((g - r - b) * 3) / 2;
       let newB = ((b - g - r) * 3) / 2;
       let rgbArr = [newR, newG, newB].map((e) => {
-        return e < 0 ? 0 : e > 255 ? 255 : e;
+        return e < 0 ? e * -1 : e > 255 ? 255 : e;
       });
       [data[i * 4], data[i * 4 + 1], data[i * 4 + 2]] = rgbArr;
     }
@@ -122,16 +122,16 @@ const photoFilter = {
     return imgData;
   },
 
-  // 褐色滤镜
-  hslj: function (imgData) {
+  // 暗调滤镜
+  adlj: function (imgData) {
     let data = imgData.data;
     for (let i = 0; i < data.length; i++) {
       let r = data[i * 4],
         g = data[i * 4 + 1],
         b = data[i * 4 + 2];
-      let newR = r * 0.393 + g * 0.769 + b * 0.189;
-      let newG = r * 0.349 + g * 0.686 + b * 0.168;
-      let newB = r * 0.272 + g * 0.534 + b * 0.131;
+      let newR = (r * r) / 255;
+      let newG = (g * g) / 255;
+      let newB = (b * b) / 255;
       let rgbArr = [newR, newG, newB].map((e) => {
         return e < 0 ? 0 : e > 255 ? 255 : e;
       });
@@ -139,6 +139,7 @@ const photoFilter = {
     }
     return imgData;
   },
+
   gsmmlj: function (imgData, radius = 5, sigma = radius / 3) {
     let handleEdge = (i, x, w) => {
       var m = x + i;
