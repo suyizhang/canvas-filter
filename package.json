@@ -2,6 +2,7 @@
   "name": "suyi",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://suyizzz.github.io/canvas-filter",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "craco-less": "^1.17.1",
